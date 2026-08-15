@@ -5,6 +5,16 @@ const NAV_LINKS = [
   { label: 'Old Events', href: '#gallery' },
   { label: 'About', href: '#about' },
   { label: 'Connect', href: '#contact' },
+  { label: 'Google Reviews', href: '#reviews' },
+];
+
+const SERVICES_LIST = [
+  'Wedding Baraat Brass Band',
+  'High-Energy DJ Nights',
+  'Pro Audio & Subwoofer Systems',
+  'Moving Head & Laser Lighting',
+  'Stage Trussing & Rigging',
+  'Silent Generator Backup',
 ];
 
 export default function Footer({ lenisRef }) {
@@ -30,24 +40,35 @@ export default function Footer({ lenisRef }) {
   );
 
   return (
-    <footer className="footer" style={{ background: 'var(--color-void)' }}>
+    <footer
+      className="footer"
+      style={{
+        background: 'var(--color-void)',
+        position: 'relative',
+        borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+        paddingTop: '5rem',
+        paddingBottom: '3rem',
+      }}
+    >
       <div
         className="section-inner"
         style={{
+          position: 'relative',
+          zIndex: 1,
           display: 'flex',
           flexDirection: 'column',
-          gap: '3rem',
+          gap: '3.5rem',
         }}
       >
+        {/* Top Architectural Columns Grid */}
         <div
           style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            gap: '2rem',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: '3rem',
           }}
         >
+          {/* Column 1: Brand Info */}
           <div>
             <a
               href="#"
@@ -59,70 +80,109 @@ export default function Footer({ lenisRef }) {
                 fontFamily: 'var(--font-display)',
                 fontSize: '1.5rem',
                 fontWeight: 800,
-                letterSpacing: '0.1em',
+                letterSpacing: '0.08em',
                 textDecoration: 'none',
                 color: 'var(--color-white)',
+                display: 'block',
+                marginBottom: '1rem',
               }}
             >
-              SUBHADRA <span style={{ color: 'var(--color-electric)' }}>BAND & DJ</span>
+              SUBHADRA <span style={{ color: 'var(--color-electric)' }}>BAND &amp; DJ</span>
             </a>
-            <p style={{ color: 'var(--color-mist)', fontSize: '0.75rem', marginTop: '0.5rem', letterSpacing: '0.1em' }}>
-              SUPPLIER OF BAND & DJ SERVICES FOR WEDDINGS & CELEBRATIONS
-            </p>
-            <p style={{ color: 'var(--color-silver)', fontSize: '0.75rem', marginTop: '0.25rem' }}>
-              Rath Road, near Barik Sahi, Bhubaneswar, Odisha 751002 | Phone: 098610 60200
+            <p style={{ color: 'var(--color-silver)', fontSize: '0.85rem', lineHeight: 1.7, marginBottom: '1rem' }}>
+              Supplier of band &amp; DJ services for weddings &amp; other celebrations from formal, family &amp; corporate events to parties.
             </p>
           </div>
 
-          <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="footer-link"
-              >
-                {link.label}
-              </a>
-            ))}
+          {/* Column 2: Navigation Links */}
+          <div>
+            <span className="text-label" style={{ display: 'block', marginBottom: '1rem' }}>
+              Navigation
+            </span>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              {NAV_LINKS.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className="footer-link"
+                    style={{ fontSize: '0.85rem', color: 'var(--color-silver)' }}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          <button
-            onClick={scrollToTop}
-            className="back-to-top"
-            aria-label="Back to top"
-            title="Back to top"
-          >
-            ↑
-          </button>
+          {/* Column 3: Services Provided */}
+          <div>
+            <span className="text-label" style={{ display: 'block', marginBottom: '1rem' }}>
+              Services Provided
+            </span>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+              {SERVICES_LIST.map((srv) => (
+                <li key={srv} style={{ fontSize: '0.82rem', color: 'var(--color-mist)' }}>
+                  {srv}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 4: Address & Hours */}
+          <div>
+            <span className="text-label" style={{ display: 'block', marginBottom: '1rem' }}>
+              Location &amp; Hours
+            </span>
+            <p style={{ color: 'var(--color-cloud)', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '0.75rem' }}>
+              📍 Rath Road, Rameswar Patna Rd, near Barik Sahi, chhack, Bhubaneswar, Odisha 751002
+            </p>
+            <p style={{ color: 'var(--color-white)', fontSize: '0.85rem', fontWeight: 600, marginBottom: '0.25rem' }}>
+              🟢 Open · Closes 11 pm
+            </p>
+            <p style={{ fontSize: '0.72rem', color: 'var(--color-mist)', fontStyle: 'italic', marginBottom: '0.75rem' }}>
+              * Indian Independence Day might affect hours.
+            </p>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Rath+Road,+Rameswar+Patna+Rd,+near+Barik+Sahi,+chhack,+Bhubaneswar,+Odisha+751002"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-link"
+              style={{ fontSize: '0.82rem', color: 'var(--color-electric)', fontWeight: 600 }}
+            >
+              🗺️ Get Directions (3h 13m) →
+            </a>
+          </div>
         </div>
 
+        {/* Bottom Copyright */}
         <div
           style={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
             flexWrap: 'wrap',
-            gap: '1rem',
-            borderTop: '1px solid rgba(255,255,255,0.03)',
+            gap: '1.5rem',
+            borderTop: '1px solid rgba(255, 255, 255, 0.03)',
             paddingTop: '2rem',
-            fontSize: '0.7rem',
+            fontSize: '0.75rem',
             color: 'var(--color-mist)',
           }}
         >
-          <p>© {new Date().getFullYear()} SUBHADRA BAND & DJ. ALL RIGHTS RESERVED.</p>
-          <div style={{ display: 'flex', gap: '1.5rem' }}>
-            <a href="tel:09861060200" className="footer-link">
+          <p>© {new Date().getFullYear()} SUBHADRA BAND &amp; DJ. ALL RIGHTS RESERVED.</p>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+            <a href="tel:09861060200" className="footer-link" style={{ fontSize: '0.8rem' }}>
               Call: 098610 60200
             </a>
-            <a
-              href="https://www.google.com/maps/search/?api=1&query=Rath+Road,+Rameswar+Patna+Rd,+near+Barik+Sahi,+chhack,+Bhubaneswar,+Odisha+751002"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="footer-link"
+            <button
+              onClick={scrollToTop}
+              className="back-to-top"
+              aria-label="Back to top"
+              title="Back to top"
             >
-              Location & Directions
-            </a>
+              ↑
+            </button>
           </div>
         </div>
       </div>

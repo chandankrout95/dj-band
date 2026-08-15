@@ -14,183 +14,261 @@ export default function Hero({ images }) {
   const text4Ref = useRef(null);
 
   useEffect(() => {
-    if (!images || images.length === 0) return;
+    const totalScrollDist = 151 * 35; // ~5285px
 
     const ctx = gsap.context(() => {
-      // Fade out scroll indicator on scroll
-      gsap.to(scrollIndicatorRef.current, {
-        opacity: 0,
-        y: 20,
+      // Create master scrubbed timeline for sequential text reveals
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: heroRef.current,
           start: 'top top',
-          end: '+=200',
-          scrub: true,
+          end: `+=${totalScrollDist}`,
+          scrub: 0.5,
+          onRefresh: () => {
+            // Force refresh scroll trigger bounds
+          },
         },
       });
 
-      const totalScrollDist = 151 * 35;
+      // 0. Fade out scroll indicator on initial scroll start
+      tl.to(scrollIndicatorRef.current, { opacity: 0, y: 20, duration: 0.05 }, 0);
 
-      // Text animations mapped to scroll progress
-      // LIGHT. → 0-20%
-      gsap.fromTo(
+      // 1. Text 1: "SUBHADRA." (Visible on start -> Holds -> Fades/Slides Out)
+      tl.to(
         text1Ref.current,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: `top+=${totalScrollDist * 0.02} top`,
-            end: `top+=${totalScrollDist * 0.1} top`,
-            scrub: true,
-          },
-        }
+        { opacity: 0, y: -60, filter: 'blur(10px)', duration: 0.08, ease: 'power2.in' },
+        0.20
       );
-      gsap.to(text1Ref.current, {
-        opacity: 0,
-        y: -30,
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: `top+=${totalScrollDist * 0.15} top`,
-          end: `top+=${totalScrollDist * 0.22} top`,
-          scrub: true,
-        },
-      });
 
-      // SOUND. → 25-45%
-      gsap.fromTo(
+      // 2. Text 2: "BAND & DJ." (Reveals -> Holds -> Fades/Slides Out)
+      tl.fromTo(
         text2Ref.current,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: `top+=${totalScrollDist * 0.25} top`,
-            end: `top+=${totalScrollDist * 0.33} top`,
-            scrub: true,
-          },
-        }
+        { opacity: 0, y: 80, filter: 'blur(10px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.1, ease: 'power2.out' },
+        0.25
+      ).to(
+        text2Ref.current,
+        { opacity: 0, y: -60, filter: 'blur(10px)', duration: 0.08, ease: 'power2.in' },
+        0.45
       );
-      gsap.to(text2Ref.current, {
-        opacity: 0,
-        y: -30,
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: `top+=${totalScrollDist * 0.38} top`,
-          end: `top+=${totalScrollDist * 0.45} top`,
-          scrub: true,
-        },
-      });
 
-      // ENERGY. → 48-68%
-      gsap.fromTo(
+      // 3. Text 3: "CELEBRATE." (Reveals -> Holds -> Fades/Slides Out)
+      tl.fromTo(
         text3Ref.current,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: `top+=${totalScrollDist * 0.48} top`,
-            end: `top+=${totalScrollDist * 0.55} top`,
-            scrub: true,
-          },
-        }
+        { opacity: 0, y: 80, filter: 'blur(10px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.1, ease: 'power2.out' },
+        0.50
+      ).to(
+        text3Ref.current,
+        { opacity: 0, y: -60, filter: 'blur(10px)', duration: 0.08, ease: 'power2.in' },
+        0.70
       );
-      gsap.to(text3Ref.current, {
-        opacity: 0,
-        y: -30,
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: `top+=${totalScrollDist * 0.6} top`,
-          end: `top+=${totalScrollDist * 0.68} top`,
-          scrub: true,
-        },
-      });
 
-      // CREATE THE NIGHT. → 72-100%
-      gsap.fromTo(
+      // 4. Text 4: "SUBHADRA BAND & DJ" (Reveals -> Holds -> Fades/Slides Out)
+      tl.fromTo(
         text4Ref.current,
-        { opacity: 0, scale: 0.9 },
-        {
-          opacity: 1,
-          scale: 1,
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: `top+=${totalScrollDist * 0.72} top`,
-            end: `top+=${totalScrollDist * 0.82} top`,
-            scrub: true,
-          },
-        }
+        { opacity: 0, y: 80, scale: 0.9, filter: 'blur(10px)' },
+        { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', duration: 0.12, ease: 'power2.out' },
+        0.75
+      ).to(
+        text4Ref.current,
+        { opacity: 0, y: -40, filter: 'blur(8px)', duration: 0.08, ease: 'power2.in' },
+        0.93
       );
-      gsap.to(text4Ref.current, {
-        opacity: 0,
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: `top+=${totalScrollDist * 0.9} top`,
-          end: `top+=${totalScrollDist * 0.98} top`,
-          scrub: true,
-        },
-      });
     }, heroRef);
+
+    // Refresh ScrollTrigger to recalculate dimensions
+    ScrollTrigger.refresh();
 
     return () => ctx.revert();
   }, [images]);
 
   return (
     <section ref={heroRef} id="hero" aria-label="Hero">
-      <ScrollSequence images={images} />
-
-      {/* Overlay Text */}
-      <div className="hero-overlay-text">
-        <h1
-          ref={text1Ref}
-          className="text-hero"
-          style={{ opacity: 0, position: 'absolute', textAlign: 'center' }}
-        >
-          SUBHADRA.
-        </h1>
-        <p
-          ref={text2Ref}
-          className="text-hero"
-          style={{ opacity: 0, position: 'absolute', textAlign: 'center' }}
-        >
-          BAND & DJ.
-        </p>
-        <p
-          ref={text3Ref}
-          className="text-hero"
-          style={{ opacity: 0, position: 'absolute', textAlign: 'center' }}
-        >
-          CELEBRATE.
-        </p>
-        <p
-          ref={text4Ref}
-          className="text-hero"
+      <ScrollSequence images={images}>
+        {/* Semi-transparent dark overlay for high text contrast */}
+        <div
           style={{
-            opacity: 0,
             position: 'absolute',
-            fontSize: 'clamp(2rem, 5vw, 5.5rem)',
-            textAlign: 'center',
-            lineHeight: 1.1,
+            inset: 0,
+            background: 'radial-gradient(circle at center, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.85) 100%)',
+            pointerEvents: 'none',
+            zIndex: 1,
           }}
-        >
-          SUBHADRA
-          <br />
-          <span style={{ color: 'var(--color-electric)' }}>BAND & DJ</span>
-        </p>
-      </div>
+        />
 
-      {/* Bottom darkening gradient */}
-      <div className="hero-bottom-fade" />
+        {/* Overlay Text pinned directly on top of canvas */}
+        <div className="hero-overlay-text" style={{ zIndex: 10 }}>
+          {/* Stage 1: Landing Page Default (SUBHADRA BAND & DJ) */}
+          <div
+            ref={text1Ref}
+            style={{
+              opacity: 1,
+              position: 'absolute',
+              textAlign: 'center',
+              lineHeight: 1.1,
+            }}
+          >
+            <h1
+              className="text-hero"
+              style={{
+                fontSize: 'clamp(2.5rem, 6.5vw, 6.5rem)',
+                textShadow: '0 10px 40px rgba(0, 0, 0, 0.9), 0 0 80px rgba(59, 130, 246, 0.4)',
+              }}
+            >
+              SUBHADRA BAND &amp; DJ
+            </h1>
+            <span
+              className="text-label"
+              style={{
+                display: 'inline-block',
+                marginTop: '0.8rem',
+                background: 'rgba(0, 0, 0, 0.75)',
+                backdropFilter: 'blur(12px)',
+                padding: '0.5rem 1.4rem',
+                borderRadius: '30px',
+                border: '1px solid rgba(59, 130, 246, 0.3)',
+                color: 'var(--color-electric)',
+                fontSize: '0.78rem',
+                letterSpacing: '0.2em',
+                fontWeight: 600,
+              }}
+            >
+              PREMIER EVENT &amp; BARAAT SUPPLIER
+            </span>
+          </div>
 
-      {/* Scroll Indicator */}
-      <div ref={scrollIndicatorRef} className="scroll-indicator">
-        <span className="scroll-indicator-text">Scroll to experience</span>
-        <div className="scroll-indicator-arrow" />
-      </div>
+          {/* Stage 2: Professional Sound & Lights */}
+          <div
+            ref={text2Ref}
+            style={{
+              opacity: 0,
+              position: 'absolute',
+              textAlign: 'center',
+              lineHeight: 1.1,
+            }}
+          >
+            <h2
+              className="text-hero"
+              style={{
+                fontSize: 'clamp(2.2rem, 5.5vw, 5.5rem)',
+                textShadow: '0 10px 40px rgba(0, 0, 0, 0.9), 0 0 80px rgba(168, 85, 247, 0.4)',
+              }}
+            >
+              PROFESSIONAL SOUND &amp; LIGHTS
+            </h2>
+            <span
+              className="text-label"
+              style={{
+                display: 'inline-block',
+                marginTop: '0.8rem',
+                background: 'rgba(0, 0, 0, 0.75)',
+                backdropFilter: 'blur(12px)',
+                padding: '0.5rem 1.4rem',
+                borderRadius: '30px',
+                border: '1px solid rgba(168, 85, 247, 0.3)',
+                color: 'var(--color-purple)',
+                fontSize: '0.78rem',
+                letterSpacing: '0.2em',
+                fontWeight: 600,
+              }}
+            >
+              PUNCTUAL &amp; AUTHENTIC SERVICE
+            </span>
+          </div>
+
+          {/* Stage 3: Best Baraat & DJ Experience */}
+          <div
+            ref={text3Ref}
+            style={{
+              opacity: 0,
+              position: 'absolute',
+              textAlign: 'center',
+              lineHeight: 1.1,
+            }}
+          >
+            <h2
+              className="text-hero"
+              style={{
+                fontSize: 'clamp(2.2rem, 5.5vw, 5.5rem)',
+                textShadow: '0 10px 40px rgba(0, 0, 0, 0.9), 0 0 80px rgba(34, 197, 94, 0.4)',
+              }}
+            >
+              BEST BARAAT &amp; DJ EXPERIENCE
+            </h2>
+            <span
+              className="text-label"
+              style={{
+                display: 'inline-block',
+                marginTop: '0.8rem',
+                background: 'rgba(0, 0, 0, 0.75)',
+                backdropFilter: 'blur(12px)',
+                padding: '0.5rem 1.4rem',
+                borderRadius: '30px',
+                border: '1px solid rgba(34, 197, 94, 0.3)',
+                color: '#22c55e',
+                fontSize: '0.78rem',
+                letterSpacing: '0.2em',
+                fontWeight: 600,
+              }}
+            >
+              ELECTRIFYING EVENT ATMOSPHERE
+            </span>
+          </div>
+
+          {/* Stage 4: Grand Finale (The Best Experience Ever) */}
+          <div
+            ref={text4Ref}
+            style={{
+              opacity: 0,
+              position: 'absolute',
+              textAlign: 'center',
+              lineHeight: 1.1,
+            }}
+          >
+            <span
+              className="text-hero"
+              style={{
+                fontSize: 'clamp(2.2rem, 6vw, 6.5rem)',
+                background: 'linear-gradient(135deg, #ffffff 0%, #3b82f6 50%, #a855f7 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                display: 'block',
+                filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.9))',
+              }}
+            >
+              THE BEST EXPERIENCE EVER
+            </span>
+            <span
+              className="text-label"
+              style={{
+                display: 'inline-block',
+                marginTop: '1rem',
+                background: 'rgba(0, 0, 0, 0.75)',
+                backdropFilter: 'blur(12px)',
+                padding: '0.6rem 1.5rem',
+                borderRadius: '30px',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                color: 'var(--color-cloud)',
+                fontSize: '0.8rem',
+                letterSpacing: '0.2em',
+              }}
+            >
+              SUBHADRA BAND &amp; DJ • BHUBANESWAR
+            </span>
+          </div>
+        </div>
+
+        {/* Bottom darkening gradient */}
+        <div className="hero-bottom-fade" />
+
+        {/* Scroll Indicator */}
+        <div ref={scrollIndicatorRef} className="scroll-indicator">
+          <span className="scroll-indicator-text">Scroll to experience</span>
+          <div className="scroll-indicator-arrow" />
+        </div>
+      </ScrollSequence>
     </section>
   );
 }

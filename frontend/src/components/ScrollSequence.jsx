@@ -6,7 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const TOTAL_FRAMES = 151;
 
-export default function ScrollSequence({ images }) {
+export default function ScrollSequence({ images, children }) {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
   const frameIndexRef = useRef(0);
@@ -115,6 +115,7 @@ export default function ScrollSequence({ images }) {
       />
       <div className="hero-vignette" />
       <div className="hero-grain" />
+      {children}
     </div>
   );
 }

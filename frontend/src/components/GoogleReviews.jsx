@@ -168,7 +168,7 @@ export default function GoogleReviews() {
         </div>
 
         {/* Highlight Note */}
-        <div
+        {/* <div
           style={{
             background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(168, 85, 247, 0.08))',
             border: '1px solid rgba(59, 130, 246, 0.25)',
@@ -208,7 +208,7 @@ export default function GoogleReviews() {
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Reviews Cards Grid */}
         <div
