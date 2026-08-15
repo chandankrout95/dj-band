@@ -43,7 +43,7 @@ export default function About() {
       <div className="section-inner" style={{ position: 'relative', zIndex: 1 }}>
         {/* Label */}
         <div className="about-animate" style={{ marginBottom: '1.5rem' }}>
-          <span className="text-label">About Us</span>
+          <span className="text-label">About Subhadra Band & DJ</span>
         </div>
 
         {/* Heading */}
@@ -51,9 +51,11 @@ export default function About() {
           className="about-animate text-display"
           style={{ marginBottom: '4rem', maxWidth: '700px' }}
         >
-          THE
+          PREMIER
           <br />
-          EXPERIENCE
+          CELEBRATION
+          <br />
+          SERVICES
         </h2>
 
         {/* Divider */}
@@ -74,24 +76,15 @@ export default function About() {
               className="text-heading"
               style={{ fontSize: 'clamp(1.2rem, 2vw, 1.6rem)', marginBottom: '1rem', fontWeight: 600 }}
             >
-              More than sound.
-              <br />
-              More than lights.
-              <br />
-              More than an event.
+              Supplier of band & DJ services for weddings & other celebrations from formal, family & corporate events to parties.
             </p>
           </div>
           <div>
             <p className="text-body-lg">
-              We create immersive DJ experiences designed to transform ordinary
-              spaces into unforgettable nights. Our approach combines
-              cutting-edge lighting technology, professional sound systems, and
-              curated musical performances to deliver a sensory experience that
-              goes beyond expectations.
+              Based at Rath Road, Bhubaneswar, Subhadra Band & DJ provides grand musical processions, high-energy DJ setups, and modern visual lighting that turn every gathering into a spectacular milestone.
             </p>
             <p className="text-body-lg" style={{ marginTop: '1.5rem' }}>
-              Every event is unique. Every audience deserves something
-              extraordinary. That&apos;s what we deliver — every single time.
+              From traditional wedding baraats to vibrant corporate galas, private parties, and cultural celebrations, we bring unmatched passion, crystal-clear sound, and captivating energy to every stage.
             </p>
           </div>
         </div>

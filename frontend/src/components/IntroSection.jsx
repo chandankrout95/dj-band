@@ -42,18 +42,18 @@ export default function IntroSection() {
 
       <div style={{ textAlign: 'center', maxWidth: '900px', position: 'relative', zIndex: 1 }}>
         <p className="reveal-line text-display" style={{ color: 'var(--color-cloud)' }}>
-          WE DON&apos;T JUST
+          WE DON&apos;T JUST PLAY MUSIC.
         </p>
         <p className="reveal-line text-display" style={{ color: 'var(--color-white)' }}>
-          PLAY MUSIC.
+          WE ELEVATE CELEBRATIONS.
         </p>
         <div style={{ height: '2rem' }} />
         <p className="reveal-line text-display" style={{ color: 'var(--color-cloud)' }}>
-          WE CREATE
+          WELCOME TO
         </p>
         <p className="reveal-line text-display">
           <span style={{ background: 'linear-gradient(135deg, #3b82f6, #a855f7)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-            THE ATMOSPHERE.
+            SUBHADRA BAND & DJ.
           </span>
         </p>
       </div>

@@ -148,23 +148,23 @@ export default function Hero({ images }) {
         <h1
           ref={text1Ref}
           className="text-hero"
-          style={{ opacity: 0, position: 'absolute' }}
+          style={{ opacity: 0, position: 'absolute', textAlign: 'center' }}
         >
-          LIGHT.
+          SUBHADRA.
         </h1>
         <p
           ref={text2Ref}
           className="text-hero"
-          style={{ opacity: 0, position: 'absolute' }}
+          style={{ opacity: 0, position: 'absolute', textAlign: 'center' }}
         >
-          SOUND.
+          BAND & DJ.
         </p>
         <p
           ref={text3Ref}
           className="text-hero"
-          style={{ opacity: 0, position: 'absolute' }}
+          style={{ opacity: 0, position: 'absolute', textAlign: 'center' }}
         >
-          ENERGY.
+          CELEBRATE.
         </p>
         <p
           ref={text4Ref}
@@ -172,14 +172,14 @@ export default function Hero({ images }) {
           style={{
             opacity: 0,
             position: 'absolute',
-            fontSize: 'clamp(2rem, 5vw, 6rem)',
+            fontSize: 'clamp(2rem, 5vw, 5.5rem)',
             textAlign: 'center',
             lineHeight: 1.1,
           }}
         >
-          CREATE THE
+          SUBHADRA
           <br />
-          NIGHT.
+          <span style={{ color: 'var(--color-electric)' }}>BAND & DJ</span>
         </p>
       </div>
 

@@ -2,12 +2,12 @@ import { useEffect, useRef } from 'react';
 import { staggerReveal } from '../animations/gsapAnimations';
 
 const EVENTS = [
-  'WEDDINGS',
-  'PRIVATE PARTIES',
-  'COLLEGE EVENTS',
-  'NIGHTLIFE',
+  'WEDDINGS & BARAAT',
+  'FAMILY CELEBRATIONS',
   'CORPORATE EVENTS',
-  'FESTIVALS',
+  'FORMAL FUNCTIONS',
+  'PRIVATE PARTIES & DJ NIGHTS',
+  'CULTURAL FESTIVALS',
 ];
 
 export default function Experience() {

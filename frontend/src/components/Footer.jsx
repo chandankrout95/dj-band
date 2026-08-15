@@ -65,10 +65,13 @@ export default function Footer({ lenisRef }) {
                 color: 'var(--color-white)',
               }}
             >
-              LUM<span style={{ color: 'var(--color-electric)' }}>I</span>X
+              SUBHADRA <span style={{ color: 'var(--color-electric)' }}>BAND & DJ</span>
             </a>
             <p style={{ color: 'var(--color-mist)', fontSize: '0.75rem', marginTop: '0.5rem', letterSpacing: '0.1em' }}>
-              PREMIUM DJ & LIGHTING PRODUCTION
+              SUPPLIER OF BAND & DJ SERVICES FOR WEDDINGS & CELEBRATIONS
+            </p>
+            <p style={{ color: 'var(--color-silver)', fontSize: '0.75rem', marginTop: '0.25rem' }}>
+              Rath Road, near Barik Sahi, Bhubaneswar, Odisha 751002 | Phone: 098610 60200
             </p>
           </div>
 
@@ -108,16 +111,18 @@ export default function Footer({ lenisRef }) {
             color: 'var(--color-mist)',
           }}
         >
-          <p>© {new Date().getFullYear()} LUMIX ENTERTAINMENT. ALL RIGHTS RESERVED.</p>
+          <p>© {new Date().getFullYear()} SUBHADRA BAND & DJ. ALL RIGHTS RESERVED.</p>
           <div style={{ display: 'flex', gap: '1.5rem' }}>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="footer-link">
-              Instagram
+            <a href="tel:09861060200" className="footer-link">
+              Call: 098610 60200
             </a>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="footer-link">
-              Facebook
-            </a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="footer-link">
-              YouTube
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Rath+Road,+Rameswar+Patna+Rd,+near+Barik+Sahi,+chhack,+Bhubaneswar,+Odisha+751002"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-link"
+            >
+              Location & Directions
             </a>
           </div>
         </div>

@@ -7,27 +7,27 @@ gsap.registerPlugin(ScrollTrigger);
 const TESTIMONIALS = [
   {
     quote:
-      'An incredible atmosphere from start to finish. The lighting completely transformed the venue into something magical.',
-    author: 'Client Name',
-    event: 'Wedding Reception',
+      'Subhadra Band & DJ made our wedding baraat electrifying! The brass band music, dhol beats, and DJ set kept everyone dancing with immense joy.',
+    author: 'Rajesh & Sweety',
+    event: 'Grand Wedding Reception, Bhubaneswar',
   },
   {
     quote:
-      'The energy was unreal. Every single person was on the dance floor all night. Best DJ experience we\'ve ever had.',
-    author: 'Client Name',
-    event: 'Private Party',
+      'The sound quality, heavy bass, and light setup were phenomenal. Subhadra Band & DJ delivered the best celebration experience for our corporate party.',
+    author: 'Sanjay Mohanty',
+    event: 'Corporate Annual Event',
   },
   {
     quote:
-      'Professional, creative, and absolutely stunning visuals. They turned our corporate event into a full production.',
-    author: 'Client Name',
-    event: 'Corporate Gala',
+      'Superb band performance and DJ music! Extremely professional, punctual, and high energy from start to finish. Highly recommended for family events.',
+    author: 'Priyanka Das',
+    event: 'Family Celebration',
   },
   {
     quote:
-      'The sound quality was crystal clear and the lighting show was beyond anything we imagined. Truly unforgettable.',
-    author: 'Client Name',
-    event: 'College Festival',
+      'From Rath Road to the wedding venue, Subhadra Band & DJ gave us an unforgettable evening with top-notch audio and dazzling lights.',
+    author: 'Amitabh Sahoo',
+    event: 'Wedding & DJ Night',
   },
 ];
 

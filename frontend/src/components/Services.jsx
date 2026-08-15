@@ -4,23 +4,23 @@ import { staggerReveal } from '../animations/gsapAnimations';
 const SERVICES = [
   {
     num: '01',
-    title: 'DJ Performance',
-    desc: 'Professional DJ performances for weddings, parties, clubs and large-scale events. Tailored setlists that read the crowd and keep the energy alive.',
+    title: 'Wedding Band & Baraat',
+    desc: 'Grand brass band, traditional dhol, and royal procession music for unforgettable wedding celebrations and festive baraat arrangements.',
   },
   {
     num: '02',
-    title: 'DJ Lighting',
-    desc: 'Dynamic lighting systems, moving heads, lasers and synchronized visual effects that transform any venue into a visual spectacle.',
+    title: 'High-Energy DJ Nights',
+    desc: 'Top-tier DJ performances for weddings, anniversaries, corporate galas, and parties with custom setlists that keep the crowd dancing all night.',
   },
   {
     num: '03',
-    title: 'Sound System',
-    desc: 'Powerful professional audio systems designed for crystal-clear, immersive sound. From intimate gatherings to stadium-scale events.',
+    title: 'Pro Sound Systems',
+    desc: 'High-fidelity audio reinforcement with powerful subwoofers and crystal-clear sound distribution tailored for venues of all scales across Bhubaneswar.',
   },
   {
     num: '04',
-    title: 'Event Production',
-    desc: 'Complete music, lighting and visual production for memorable events. End-to-end planning, setup, and execution by our expert team.',
+    title: 'Event & Lighting Production',
+    desc: 'Complete event production with moving heads, atmospheric stage lighting, laser shows, and seamless execution for formal and family celebrations.',
   },
 ];
 

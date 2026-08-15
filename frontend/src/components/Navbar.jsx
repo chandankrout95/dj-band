@@ -69,7 +69,7 @@ export default function Navbar({ lenisRef }) {
         aria-label="Main navigation"
       >
         <a href="#" className="navbar-logo" onClick={handleLogoClick}>
-          LUM<span>I</span>X
+          SUBHADRA <span>BAND & DJ</span>
         </a>
 
         <ul className="navbar-links">

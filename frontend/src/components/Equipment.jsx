@@ -2,12 +2,12 @@ import { useEffect, useRef } from 'react';
 import { staggerReveal } from '../animations/gsapAnimations';
 
 const EQUIPMENT = [
-  { icon: '◎', label: 'DJ Controllers' },
-  { icon: '◉', label: 'Professional Sound' },
+  { icon: '🎺', label: 'Brass Band & Dhol' },
+  { icon: '🎧', label: 'Pro DJ Consoles' },
+  { icon: '🔊', label: 'High-Power Bass Sound' },
   { icon: '✦', label: 'Moving Head Lights' },
-  { icon: '⟐', label: 'Lasers' },
-  { icon: '◈', label: 'LED Lighting' },
-  { icon: '⬡', label: 'Stage Systems' },
+  { icon: '⟐', label: 'Laser Lighting' },
+  { icon: '⬡', label: 'Stage & Truss Setup' },
 ];
 
 export default function Equipment() {
