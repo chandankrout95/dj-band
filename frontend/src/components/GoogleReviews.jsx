@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Star, Heart, ChevronDown, ChevronRight } from 'lucide-react';
 import { staggerReveal } from '../animations/gsapAnimations';
 
 const REVIEWS = [
@@ -317,7 +318,9 @@ export default function GoogleReviews() {
 
                 {/* Star Rating */}
                 <div style={{ color: '#f59e0b', fontSize: '1.1rem', marginBottom: '1rem', display: 'flex', gap: '3px' }}>
-                  {'★'.repeat(r.rating)}
+                  {[...Array(r.rating)].map((_, i) => (
+                    <Star key={i} size={16} fill="#f59e0b" color="#f59e0b" />
+                  ))}
                 </div>
 
                 {/* Comment Text */}
@@ -336,7 +339,7 @@ export default function GoogleReviews() {
                 {/* Likes Badge */}
                 {r.likes > 0 && (
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', color: '#ef4444', marginBottom: '1rem' }}>
-                    <span>❤️</span>
+                    <Heart size={14} fill="#ef4444" color="#ef4444" />
                     <span>{r.likes}</span>
                   </div>
                 )}
@@ -366,7 +369,7 @@ export default function GoogleReviews() {
                       padding: 0,
                     }}
                   >
-                    <span>{expandedReplies[r.id] ? '▼' : '►'}</span>
+                    {expandedReplies[r.id] ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
                     <span>ସୁଭଦ୍ରା ବ୍ଯାଣ୍ଡ୍ ଆଣ୍ଡ ଡିଜେ (Owner Response)</span>
                   </button>
 

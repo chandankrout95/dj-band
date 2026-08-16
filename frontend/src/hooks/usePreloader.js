@@ -19,7 +19,7 @@ export default function usePreloader() {
 
     const loadImage = (index) => {
       return new Promise((resolve) => {
-        const img = new Image();
+        const img = new window.Image();
         img.src = getFramePath(index);
         img.onload = () => {
           loadedImages[index - 1] = img;

@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { MapPin, Clock, Phone, ArrowUp, Navigation2 } from 'lucide-react';
 
 const NAV_LINKS = [
   { label: 'Items', href: '#items' },
@@ -134,11 +135,13 @@ export default function Footer({ lenisRef }) {
             <span className="text-label" style={{ display: 'block', marginBottom: '1rem' }}>
               Location &amp; Hours
             </span>
-            <p style={{ color: 'var(--color-cloud)', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '0.75rem' }}>
-              📍 Rath Road, Rameswar Patna Rd, near Barik Sahi, chhack, Bhubaneswar, Odisha 751002
+            <p style={{ color: 'var(--color-cloud)', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '0.75rem', display: 'flex', alignItems: 'flex-start', gap: '0.4rem' }}>
+              <MapPin size={16} style={{ color: 'var(--color-electric)', flexShrink: 0, marginTop: '2px' }} />
+              <span>Rath Road, Rameswar Patna Rd, near Barik Sahi, chhack, Bhubaneswar, Odisha 751002</span>
             </p>
-            <p style={{ color: 'var(--color-white)', fontSize: '0.85rem', fontWeight: 600, marginBottom: '0.25rem' }}>
-              🟢 Open · Closes 11 pm
+            <p style={{ color: 'var(--color-white)', fontSize: '0.85rem', fontWeight: 600, marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+              <Clock size={16} style={{ color: '#22c55e' }} />
+              <span>Open · Closes 11 pm</span>
             </p>
             <p style={{ fontSize: '0.72rem', color: 'var(--color-mist)', fontStyle: 'italic', marginBottom: '0.75rem' }}>
               * Indian Independence Day might affect hours.
@@ -148,9 +151,10 @@ export default function Footer({ lenisRef }) {
               target="_blank"
               rel="noopener noreferrer"
               className="contact-link"
-              style={{ fontSize: '0.82rem', color: 'var(--color-electric)', fontWeight: 600 }}
+              style={{ fontSize: '0.82rem', color: 'var(--color-electric)', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
             >
-              🗺️ Get Directions (3h 13m) →
+              <Navigation2 size={14} />
+              <span>Get Directions (3h 13m) →</span>
             </a>
           </div>
         </div>
@@ -172,8 +176,9 @@ export default function Footer({ lenisRef }) {
           <p>© {new Date().getFullYear()} SUBHADRA BAND &amp; DJ. ALL RIGHTS RESERVED.</p>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-            <a href="tel:09861060200" className="footer-link" style={{ fontSize: '0.8rem' }}>
-              Call: 098610 60200
+            <a href="tel:09861060200" className="footer-link" style={{ fontSize: '0.8rem', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+              <Phone size={14} />
+              <span>098610 60200</span>
             </a>
             <button
               onClick={scrollToTop}
@@ -181,7 +186,7 @@ export default function Footer({ lenisRef }) {
               aria-label="Back to top"
               title="Back to top"
             >
-              ↑
+              <ArrowUp size={16} />
             </button>
           </div>
         </div>

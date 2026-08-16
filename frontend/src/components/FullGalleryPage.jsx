@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { ArrowLeft, ZoomIn, MapPin, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { GALLERY_IMAGES, CATEGORIES } from './GallerySection';
 
 export default function FullGalleryPage({ onBackToHome }) {
@@ -87,9 +88,10 @@ export default function FullGalleryPage({ onBackToHome }) {
         <button
           onClick={onBackToHome}
           className="btn-secondary"
-          style={{ padding: '0.6rem 1.25rem', fontSize: '0.75rem' }}
+          style={{ padding: '0.6rem 1.25rem', fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
         >
-          ← Back to Home
+          <ArrowLeft size={16} />
+          <span>Back to Home</span>
         </button>
 
         <div style={{ textAlign: 'right' }}>
@@ -193,7 +195,7 @@ export default function FullGalleryPage({ onBackToHome }) {
                   padding: '1.25rem',
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span
                     style={{
                       background: 'rgba(0,0,0,0.7)',
@@ -207,7 +209,9 @@ export default function FullGalleryPage({ onBackToHome }) {
                   >
                     {img.category}
                   </span>
-                  <span style={{ fontSize: '1rem', color: '#fff' }}>🔍 Zoom</span>
+                  <span style={{ fontSize: '0.75rem', color: '#fff', display: 'flex', alignItems: 'center', gap: '0.3rem', background: 'rgba(0,0,0,0.6)', padding: '4px 10px', borderRadius: '20px' }}>
+                    <ZoomIn size={14} /> Zoom
+                  </span>
                 </div>
                 <div>
                   <h3
@@ -221,8 +225,8 @@ export default function FullGalleryPage({ onBackToHome }) {
                   >
                     {img.title}
                   </h3>
-                  <p style={{ fontSize: '0.78rem', color: 'var(--color-mist)' }}>
-                    📍 {img.location}
+                  <p style={{ fontSize: '0.78rem', color: 'var(--color-mist)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                    <MapPin size={12} style={{ color: 'var(--color-electric)' }} /> {img.location}
                   </p>
                 </div>
               </div>
@@ -231,8 +235,9 @@ export default function FullGalleryPage({ onBackToHome }) {
         </div>
 
         <div style={{ textAlign: 'center', marginTop: '5rem' }}>
-          <button onClick={onBackToHome} className="btn-primary">
-            ← Return to Main Page
+          <button onClick={onBackToHome} className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+            <ArrowLeft size={16} />
+            <span>Return to Main Page</span>
           </button>
         </div>
       </div>
@@ -273,7 +278,7 @@ export default function FullGalleryPage({ onBackToHome }) {
               zIndex: 100001,
             }}
           >
-            ✕
+            <X size={24} />
           </button>
 
           <button
@@ -291,10 +296,13 @@ export default function FullGalleryPage({ onBackToHome }) {
               borderRadius: '50%',
               fontSize: '1.4rem',
               cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               zIndex: 100001,
             }}
           >
-            ‹
+            <ChevronLeft size={28} />
           </button>
 
           <button
@@ -312,10 +320,13 @@ export default function FullGalleryPage({ onBackToHome }) {
               borderRadius: '50%',
               fontSize: '1.4rem',
               cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               zIndex: 100001,
             }}
           >
-            ›
+            <ChevronRight size={28} />
           </button>
 
           <div
@@ -385,8 +396,8 @@ export default function FullGalleryPage({ onBackToHome }) {
               >
                 {selectedImage.title}
               </h3>
-              <p style={{ fontSize: '0.88rem', color: 'var(--color-silver)' }}>
-                📍 {selectedImage.location} • {selectedImage.description}
+              <p style={{ fontSize: '0.88rem', color: 'var(--color-silver)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }}>
+                <MapPin size={14} style={{ color: 'var(--color-electric)' }} /> {selectedImage.location} • {selectedImage.description}
               </p>
             </div>
           </div>

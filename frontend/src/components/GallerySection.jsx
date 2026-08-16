@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { ZoomIn, MapPin, Images, ArrowRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { staggerReveal } from '../animations/gsapAnimations';
 
 const GALLERY_IMAGES = [
@@ -119,8 +120,8 @@ export default function GallerySection({ onViewAllEvents }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const gridRef = useRef(null);
 
-  // Featured 6 images for home section preview
-  const previewImages = GALLERY_IMAGES.slice(0, 6);
+  // Featured 4 images for home section preview
+  const previewImages = GALLERY_IMAGES.slice(0, 4);
 
   useEffect(() => {
     const anim = staggerReveal(gridRef.current, '.gallery-card', {
@@ -204,13 +205,7 @@ export default function GallerySection({ onViewAllEvents }) {
               </h2>
             </div>
 
-            <button
-              onClick={onViewAllEvents}
-              className="btn-primary"
-              style={{ padding: '0.85rem 1.8rem', fontSize: '0.75rem' }}
-            >
-              View More Events →
-            </button>
+
           </div>
 
           {/* Gallery Grid */}
@@ -290,11 +285,10 @@ export default function GallerySection({ onViewAllEvents }) {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        fontSize: '0.9rem',
                         boxShadow: '0 0 15px rgba(59,130,246,0.5)',
                       }}
                     >
-                      🔍
+                      <ZoomIn size={16} />
                     </span>
                   </div>
 
@@ -310,8 +304,8 @@ export default function GallerySection({ onViewAllEvents }) {
                     >
                       {img.title}
                     </h3>
-                    <p style={{ fontSize: '0.75rem', color: 'var(--color-mist)' }}>
-                      📍 {img.location}
+                    <p style={{ fontSize: '0.75rem', color: 'var(--color-mist)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                      <MapPin size={12} style={{ color: 'var(--color-electric)' }} /> {img.location}
                     </p>
                   </div>
                 </div>
@@ -320,9 +314,27 @@ export default function GallerySection({ onViewAllEvents }) {
           </div>
 
           {/* View More Redirect CTA */}
-          <div style={{ textAlign: 'center', marginTop: '3.5rem' }}>
-            <button onClick={onViewAllEvents} className="btn-secondary">
-              View All Old Events &amp; Gallery ({GALLERY_IMAGES.length}+ Photos)
+          <div style={{ textAlign: 'center', marginTop: '4rem' }}>
+            <button
+              onClick={onViewAllEvents}
+              className="btn-primary"
+              style={{
+                padding: '1.1rem 2.6rem',
+                fontSize: '0.88rem',
+                letterSpacing: '0.15em',
+                borderRadius: '50px',
+                background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(168, 85, 247, 0.2))',
+                border: '1px solid rgba(168, 85, 247, 0.5)',
+                boxShadow: '0 0 30px rgba(168, 85, 247, 0.25)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.8rem',
+                cursor: 'pointer',
+              }}
+            >
+              <Images size={18} />
+              <span>View All ({GALLERY_IMAGES.length}+) Old Events &amp; Photos</span>
+              <ArrowRight size={18} />
             </button>
           </div>
         </div>
@@ -370,7 +382,7 @@ export default function GallerySection({ onViewAllEvents }) {
             onMouseOver={(e) => (e.currentTarget.style.background = 'rgba(239, 68, 68, 0.8)')}
             onMouseOut={(e) => (e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)')}
           >
-            ✕
+            <X size={24} />
           </button>
 
           {/* Prev Arrow */}
@@ -399,7 +411,7 @@ export default function GallerySection({ onViewAllEvents }) {
             onMouseOver={(e) => (e.currentTarget.style.background = 'rgba(59, 130, 246, 0.8)')}
             onMouseOut={(e) => (e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)')}
           >
-            ‹
+            <ChevronLeft size={28} />
           </button>
 
           {/* Next Arrow */}
@@ -428,7 +440,7 @@ export default function GallerySection({ onViewAllEvents }) {
             onMouseOver={(e) => (e.currentTarget.style.background = 'rgba(59, 130, 246, 0.8)')}
             onMouseOut={(e) => (e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)')}
           >
-            ›
+            <ChevronRight size={28} />
           </button>
 
           {/* Modal Container */}
@@ -500,8 +512,8 @@ export default function GallerySection({ onViewAllEvents }) {
               >
                 {selectedImage.title}
               </h3>
-              <p style={{ fontSize: '0.88rem', color: 'var(--color-silver)' }}>
-                📍 {selectedImage.location} • {selectedImage.description}
+              <p style={{ fontSize: '0.88rem', color: 'var(--color-silver)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }}>
+                <MapPin size={14} style={{ color: 'var(--color-electric)' }} /> {selectedImage.location} • {selectedImage.description}
               </p>
             </div>
           </div>

@@ -67,8 +67,43 @@ export default function Navbar({ lenisRef }) {
         role="navigation"
         aria-label="Main navigation"
       >
-        <a href="#" className="navbar-logo" onClick={handleLogoClick}>
-          SUBHADRA <span>BAND & DJ</span>
+        <a
+          href="#"
+          className="navbar-logo"
+          onClick={handleLogoClick}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '2px',
+            lineHeight: 1.1,
+            textDecoration: 'none',
+          }}
+        >
+          <span
+            style={{
+              fontSize: 'clamp(1.4rem, 2.5vw, 1.85rem)',
+              fontWeight: 900,
+              letterSpacing: '0.02em',
+              background: 'linear-gradient(135deg, #ffffff 0%, #3b82f6 50%, #a855f7 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              display: 'block',
+            }}
+          >
+            ସୁଭଦ୍ରା ବ୍ୟାଣ୍ଡ୍ &amp; ଡିଜେ
+          </span>
+          <span
+            style={{
+              fontSize: '0.72rem',
+              color: 'var(--color-silver)',
+              fontWeight: 600,
+              letterSpacing: '0.18em',
+              display: 'block',
+            }}
+          >
+            SUBHADRA BAND &amp; DJ
+          </span>
         </a>
 
         <ul className="navbar-links">
