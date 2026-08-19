@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect, useCallback } from 'react';
 import { ArrowLeft, ZoomIn, MapPin, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { GALLERY_IMAGES, CATEGORIES } from './GallerySection';

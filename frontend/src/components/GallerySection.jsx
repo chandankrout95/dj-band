@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { ZoomIn, MapPin, Images, ArrowRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { staggerReveal } from '../animations/gsapAnimations';

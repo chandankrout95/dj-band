@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef } from 'react';
 import { Phone, MessageCircle, Navigation2, MapPin, Clock } from 'lucide-react';
 import { fadeInUp } from '../animations/gsapAnimations';

@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect, useRef } from 'react';
 import { Star, Heart, ChevronDown, ChevronRight } from 'lucide-react';
 import { staggerReveal } from '../animations/gsapAnimations';

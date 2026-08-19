@@ -1,3 +1,5 @@
+'use client';
+
 import { useCallback } from 'react';
 import { MapPin, Clock, Phone, ArrowUp, Navigation2 } from 'lucide-react';
 

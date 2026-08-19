@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef } from 'react';
 import { Music, Disc, Volume2, Sparkles, Layers, Zap } from 'lucide-react';
 import { staggerReveal } from '../animations/gsapAnimations';
