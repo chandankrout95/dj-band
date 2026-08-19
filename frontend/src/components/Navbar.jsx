@@ -75,6 +75,7 @@ export default function Navbar({ lenisRef }) {
           onClick={handleLogoClick}
           style={{
             display: 'flex',
+            alignItems: 'center',
             flexDirection: 'column',
             gap: '2px',
             lineHeight: 1.1,
@@ -83,7 +84,7 @@ export default function Navbar({ lenisRef }) {
         >
           <span
             style={{
-              fontSize: 'clamp(1.4rem, 2.5vw, 1.85rem)',
+              fontSize: 'clamp(1.2rem, 2.2vw, 1.55rem)',
               fontWeight: 900,
               letterSpacing: '0.02em',
               background: 'linear-gradient(135deg, #ffffff 0%, #3b82f6 50%, #a855f7 100%)',
@@ -93,18 +94,18 @@ export default function Navbar({ lenisRef }) {
               display: 'block',
             }}
           >
-            ସୁଭଦ୍ରା ବ୍ୟାଣ୍ଡ୍ &amp; ଡିଜେ
+            ସୁଭଦ୍ରା
           </span>
           <span
             style={{
-              fontSize: '0.72rem',
-              color: 'var(--color-silver)',
-              fontWeight: 600,
-              letterSpacing: '0.18em',
+              fontSize: 'clamp(0.95rem, 1.8vw, 1.25rem)',
+              fontWeight: 800,
+              letterSpacing: '0.04em',
+              color: 'var(--color-electric)',
               display: 'block',
             }}
           >
-            SUBHADRA BAND &amp; DJ
+            ବ୍ୟାଣ୍ଡ୍ &amp; ଡିଜେ
           </span>
         </a>
 

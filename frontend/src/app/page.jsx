@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import useLenis from '@/hooks/useLenis';
 import usePreloader from '@/hooks/usePreloader';
 
-import LoadingScreen from '@/components/LoadingScreen';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import ItemSection from '@/components/ItemSection';
@@ -17,8 +16,7 @@ import Footer from '@/components/Footer';
 
 export default function Home() {
   const lenisRef = useLenis();
-  const { progress, isLoaded, images } = usePreloader();
-  const [showContent, setShowContent] = useState(false);
+  const { images } = usePreloader();
   const cursorRef = useRef(null);
   const router = useRouter();
 
@@ -45,24 +43,16 @@ export default function Home() {
 
   return (
     <>
-      <LoadingScreen
-        progress={progress}
-        isLoaded={isLoaded}
-        onComplete={() => setShowContent(true)}
-      />
-
-      {showContent && (
-        <main className="relative z-[1] min-h-screen bg-black text-white">
-          <Navbar lenisRef={lenisRef} />
-          <Hero images={images} />
-          <ItemSection />
-          <GallerySection onViewAllEvents={handleOpenFullGallery} />
-          <About />
-          <Contact />
-          <GoogleReviews />
-          <Footer lenisRef={lenisRef} />
-        </main>
-      )}
+      <main className="relative z-[1] min-h-screen bg-black text-white">
+        <Navbar lenisRef={lenisRef} />
+        <Hero images={images} />
+        <ItemSection />
+        <GallerySection onViewAllEvents={handleOpenFullGallery} />
+        <About />
+        <Contact />
+        <GoogleReviews />
+        <Footer lenisRef={lenisRef} />
+      </main>
 
       {/* Cursor Glow */}
       <div
