@@ -1,10 +1,11 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { Music, Disc, Volume2, Sparkles, Layers, Zap } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Music, Disc, Volume2, Sparkles, Layers, Zap, ArrowRight } from 'lucide-react';
 import { staggerReveal } from '../animations/gsapAnimations';
 
-const ITEMS = [
+export const ITEMS = [
   {
     id: 'brass-band',
     Icon: Music,
@@ -12,6 +13,16 @@ const ITEMS = [
     tag: 'Baraat & Processions',
     desc: 'Grand royal brass band with trained musicians, ceremonial uniform, and energetic dhol drummers tailored for wedding baraats.',
     image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=800&auto=format&fit=crop',
+    fullDesc:
+      'Our brass band ensemble features 12–20 trained musicians in full ceremonial uniforms, performing a curated mix of classic Bollywood wedding songs, traditional Odia melodies, and high-energy celebration tunes. Complemented by powerful dhol and nagada drummers, this is the quintessential baraat experience that fills every street with joy.',
+    specs: [
+      '12–20 trained uniformed musicians',
+      'Traditional dhol & nagada ensemble',
+      'Bollywood & Odia repertoire',
+      'LED-lit evening processions',
+      'Coordinated with horse/chariot',
+      'Available across Odisha',
+    ],
   },
   {
     id: 'dj-console',
@@ -20,6 +31,16 @@ const ITEMS = [
     tag: 'High-Energy DJ Nights',
     desc: 'State-of-the-art Pioneer controllers, digital mixers, cordless mics, and custom live mixing setups for non-stop dancing.',
     image: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop',
+    fullDesc:
+      'Our DJ setups feature industry-standard Pioneer CDJ-3000 controllers and DJM-900NXS2 mixers, delivering flawless sound quality and seamless transitions. Each console comes with cordless microphones for announcements, custom LED panels, and a massive library of tracks spanning Bollywood, EDM, hip-hop, regional hits, and classic party anthems.',
+    specs: [
+      'Pioneer CDJ-3000 & DJM-900NXS2',
+      'Wireless microphone systems',
+      'Custom LED display panels',
+      '50,000+ track library',
+      'Live mixing & beat matching',
+      'Event MC / emcee services',
+    ],
   },
   {
     id: 'sound-system',
@@ -28,6 +49,16 @@ const ITEMS = [
     tag: 'Pro Audio Systems',
     desc: 'Crystal-clear line array speaker systems, heavy bass subwoofers, and acoustic audio distribution for venues of all sizes.',
     image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=800&auto=format&fit=crop',
+    fullDesc:
+      'Our sound systems are engineered for pristine audio at any scale. From intimate indoor venues to massive outdoor arenas, we deploy line array speakers for uniform coverage, heavy 18" and 21" subwoofers for deep bass, and digital mixing consoles for multi-channel control. Every setup undergoes venue acoustic assessment for optimal placement.',
+    specs: [
+      'JBL/QSC line array systems',
+      '18" & 21" bass subwoofers',
+      'Digital mixing consoles',
+      'Multi-zone audio distribution',
+      'Feedback elimination systems',
+      'Venue acoustic assessment',
+    ],
   },
   {
     id: 'moving-lights',
@@ -36,6 +67,16 @@ const ITEMS = [
     tag: 'Atmospheric Lighting',
     desc: 'DMX-programmed moving head beams, RGB laser scanners, ambient LED washes, and heavy fog machines for visual magic.',
     image: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=800&auto=format&fit=crop',
+    fullDesc:
+      'Create an unforgettable visual spectacle with our premium lighting equipment. Our DMX-programmed moving heads deliver precise beam effects with rapid pan/tilt movement. Combined with RGB laser scanners, atmospheric fog machines, and LED wash lights, we transform any venue into an immersive visual experience that matches the energy of your event.',
+    specs: [
+      'DMX-512 moving head beams',
+      'RGB laser scanner effects',
+      'Heavy-duty fog & haze machines',
+      'LED wash & uplighting',
+      'Custom DMX programming',
+      'Intelligent lighting design',
+    ],
   },
   {
     id: 'stage-truss',
@@ -44,6 +85,16 @@ const ITEMS = [
     tag: 'Stage Setup',
     desc: 'Heavy-duty aluminium truss framing, custom stage backdrops, LED framing, and architectural venue lighting.',
     image: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop',
+    fullDesc:
+      'Our stage infrastructure includes heavy-duty aluminium truss systems capable of supporting extensive lighting rigs, LED panels, and custom backdrops. We design and build stage setups tailored to your venue dimensions and event theme, creating a professional performance environment that impresses every guest.',
+    specs: [
+      'Heavy-duty aluminium truss',
+      'Custom stage backdrops',
+      'LED panel framing',
+      'Architectural venue lighting',
+      'Modular stage platforms',
+      'Professional rigging & safety',
+    ],
   },
   {
     id: 'power-backup',
@@ -52,11 +103,22 @@ const ITEMS = [
     tag: 'Uninterrupted Power',
     desc: 'Mobile silent generator backup ensuring seamless continuous sound and lighting performance throughout your event.',
     image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=800&auto=format&fit=crop',
+    fullDesc:
+      'Never worry about power interruptions during your event. Our mobile silent generators provide reliable backup power that kicks in seamlessly, ensuring your sound, lighting, and DJ equipment run without a single hiccup. Designed for noise-sensitive environments, our generators operate at whisper-quiet levels so the music is all your guests hear.',
+    specs: [
+      'Silent-operation generators',
+      'Automatic transfer switching',
+      '25–100 KVA capacity range',
+      'Fuel-efficient diesel engines',
+      'On-site operator included',
+      '24/7 power monitoring',
+    ],
   },
 ];
 
 export default function ItemSection() {
   const gridRef = useRef(null);
+  const router = useRouter();
 
   useEffect(() => {
     const anim = staggerReveal(gridRef.current, '.item-card', {
@@ -68,9 +130,13 @@ export default function ItemSection() {
     return () => anim?.scrollTrigger?.kill();
   }, []);
 
+  const handleCardClick = (id) => {
+    router.push(`/equipments/${id}`);
+  };
+
   return (
     <section
-      id="items"
+      id="equipments"
       className="section"
       style={{ background: 'var(--color-abyss)', position: 'relative' }}
       aria-label="Our Items & Equipment"
@@ -86,10 +152,10 @@ export default function ItemSection() {
 
       <div className="section-inner" style={{ position: 'relative', zIndex: 1 }}>
         <span className="text-label" style={{ display: 'block', marginBottom: '1.5rem' }}>
-          Services &amp; Equipment Items
+          Equipment & Items
         </span>
         <h2 className="text-display" style={{ marginBottom: '4rem' }}>
-          OUR <span style={{ color: 'var(--color-electric)' }}>ITEMS.</span>
+          OUR <span style={{ color: 'var(--color-electric)' }}>EQUIPMENT.</span>
         </h2>
 
         <div
@@ -106,14 +172,26 @@ export default function ItemSection() {
               <div
                 key={item.id}
                 className="item-card"
+                onClick={() => handleCardClick(item.id)}
                 style={{
                   background: 'rgba(255, 255, 255, 0.02)',
                   border: '1px solid rgba(255, 255, 255, 0.06)',
                   borderRadius: '12px',
                   overflow: 'hidden',
-                  transition: 'all 0.4s ease',
+                  transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                   display: 'flex',
                   flexDirection: 'column',
+                  cursor: 'pointer',
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.border = '1px solid rgba(59, 130, 246, 0.3)';
+                  e.currentTarget.style.transform = 'translateY(-6px)';
+                  e.currentTarget.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.4)';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.border = '1px solid rgba(255, 255, 255, 0.06)';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = 'none';
                 }}
               >
                 <div
@@ -130,7 +208,7 @@ export default function ItemSection() {
                       width: '100%',
                       height: '100%',
                       objectFit: 'cover',
-                      transition: 'transform 0.5s ease',
+                      transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
                     }}
                     onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.08)')}
                     onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
@@ -192,10 +270,27 @@ export default function ItemSection() {
                       fontSize: '0.88rem',
                       color: 'var(--color-silver)',
                       lineHeight: 1.6,
+                      flexGrow: 1,
                     }}
                   >
                     {item.desc}
                   </p>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      marginTop: '1.25rem',
+                      color: 'var(--color-electric)',
+                      fontSize: '0.8rem',
+                      fontWeight: 600,
+                      letterSpacing: '0.08em',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    <span>View Details</span>
+                    <ArrowRight size={16} />
+                  </div>
                 </div>
               </div>
             );

@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { ZoomIn, MapPin, Images, ArrowRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
+import { MapPin, Images, ArrowRight } from 'lucide-react';
 import { staggerReveal } from '../animations/gsapAnimations';
 
-const GALLERY_IMAGES = [
+export const GALLERY_IMAGES = [
   {
     id: 1,
     title: 'Grand Wedding Baraat Procession',
@@ -13,6 +14,8 @@ const GALLERY_IMAGES = [
     date: '2025',
     src: '/frames/ezgif-frame-015.jpg',
     description: 'Electrifying wedding baraat procession with live brass band tunes and traditional dhol drumming.',
+    fullDesc:
+      'This grand wedding baraat procession on Rath Road featured our full 18-member brass band ensemble in ceremonial attire, accompanied by powerful dhol and nagada drummers. The procession illuminated the streets of Bhubaneswar with LED lighting, decorated horse chariot, and non-stop celebration music that had the entire neighbourhood joining in the festivities.',
   },
   {
     id: 2,
@@ -22,6 +25,8 @@ const GALLERY_IMAGES = [
     date: '2025',
     src: '/frames/ezgif-frame-035.jpg',
     description: 'High-energy DJ performance accompanied by synchronized moving heads and ambient light show.',
+    fullDesc:
+      'At the prestigious Mayfair Lagoon, our DJ team delivered an unforgettable reception night with Pioneer CDJ setups, synchronized moving head beams, and a curated setlist spanning Bollywood classics to EDM drops. The dance floor was packed from 9 PM till the early hours, with the lighting design perfectly complementing every beat.',
   },
   {
     id: 3,
@@ -31,6 +36,8 @@ const GALLERY_IMAGES = [
     date: '2024',
     src: '/frames/ezgif-frame-065.jpg',
     description: 'Sophisticated sound reinforcement and elegant stage lighting setup for corporate award night.',
+    fullDesc:
+      'For this prestigious corporate gala at Hotel Swosti Premium, we deployed our premium line array sound system for crystal-clear audio across the banquet hall. The stage was dressed with elegant warm-white wash lighting, custom gobo projections featuring the company logo, and subtle atmospheric haze that created a refined, award-ceremony atmosphere.',
   },
   {
     id: 4,
@@ -40,6 +47,8 @@ const GALLERY_IMAGES = [
     date: '2024',
     src: '/frames/ezgif-frame-090.jpg',
     description: 'Laser beam projections and fog effects creating a magical stage visual spectacle.',
+    fullDesc:
+      'This outdoor event in Patia showcased the full power of our lighting production capabilities. Multiple DMX-programmed moving heads created dynamic beam patterns, while RGB laser scanners painted the night sky with vivid colors. Heavy fog machines added atmospheric depth, transforming the open-air venue into a mesmerizing visual spectacle.',
   },
   {
     id: 5,
@@ -48,7 +57,9 @@ const GALLERY_IMAGES = [
     location: 'Cuttack Road',
     date: '2024',
     src: '/frames/ezgif-frame-115.jpg',
-    description: 'Uniformed brass band performing classic celebration melodies for the groom’s family.',
+    description: 'Uniformed brass band performing classic celebration melodies for the groom\'s family.',
+    fullDesc:
+      'Our uniformed brass band performed a heartfelt selection of classic wedding melodies and traditional Odia celebration songs along Cuttack Road. The groom\'s family requested a mix of timeless Bollywood tracks and regional favorites, and our musicians delivered each piece with precision and passion, making the baraat truly memorable.',
   },
   {
     id: 6,
@@ -58,6 +69,8 @@ const GALLERY_IMAGES = [
     date: '2024',
     src: '/frames/ezgif-frame-140.jpg',
     description: 'Non-stop dance floor energy powered by custom DJ setlists and dual bass subwoofers.',
+    fullDesc:
+      'This private birthday party in Jaydev Vihar was all about high-energy dancing. We set up dual 21" subwoofers for deep, chest-thumping bass alongside crystal-clear line array speakers. Our DJ read the crowd perfectly, transitioning between Bollywood bangers, hip-hop, and EDM tracks, keeping the dance floor packed for five hours straight.',
   },
   {
     id: 7,
@@ -67,6 +80,8 @@ const GALLERY_IMAGES = [
     date: '2023',
     src: '/frames/ezgif-frame-045.jpg',
     description: 'Massive open-air festival audio setup with multi-angle trussing and color washes.',
+    fullDesc:
+      'For this large-scale cultural festival at Exhibition Ground, we deployed our biggest sound system — multiple line array stacks for uniform coverage across the massive open-air venue. The stage featured multi-angle aluminium trussing supporting moving heads, LED washes, and atmospheric effects, creating a concert-grade production experience.',
   },
   {
     id: 8,
@@ -76,6 +91,8 @@ const GALLERY_IMAGES = [
     date: '2023',
     src: '/frames/ezgif-frame-080.jpg',
     description: 'Intimate musical band performance and ambient warm lighting for family celebration.',
+    fullDesc:
+      'This intimate 25th wedding anniversary celebration in Khandagiri featured our smaller acoustic band ensemble performing romantic melodies and classic hits. Warm amber uplighting and soft LED washes created a cozy, elegant atmosphere perfect for the family gathering. The evening was a beautiful blend of music, memories, and heartfelt moments.',
   },
   {
     id: 9,
@@ -85,6 +102,8 @@ const GALLERY_IMAGES = [
     date: '2023',
     src: '/frames/ezgif-frame-100.jpg',
     description: 'Interactive DJ dance floor setup for wedding Sangeet ceremony.',
+    fullDesc:
+      'The Sangeet night on Janpath was a vibrant celebration of music and dance. Our DJ setup featured interactive elements — a request system, dance battle segments, and games that got every family member on the floor. The lighting was programmed to shift with the music mood, from warm romantic hues to high-energy strobes for the dance-offs.',
   },
   {
     id: 10,
@@ -94,6 +113,8 @@ const GALLERY_IMAGES = [
     date: '2023',
     src: '/frames/ezgif-frame-125.jpg',
     description: 'Dynamic DMX lighting sequence with rapid pan/tilt moving head fixtures.',
+    fullDesc:
+      'This event showcased our premium moving head rig — 12 high-powered beam fixtures with rapid pan/tilt capabilities, all running custom DMX sequences synchronized to the music. The result was a concert-quality lighting show with precise beam effects, color mixing, and dramatic gobo patterns that wowed every guest in the arena.',
   },
   {
     id: 11,
@@ -103,6 +124,8 @@ const GALLERY_IMAGES = [
     date: '2023',
     src: '/frames/ezgif-frame-025.jpg',
     description: 'Rhythmic dhol drummers leading the street wedding procession with high spirit.',
+    fullDesc:
+      'In the historic lanes of Old Town, our dhol drummers led a spirited baraat procession with infectious rhythms that echoed through the narrow streets. The energetic beats drew crowds of well-wishers, creating an unforgettable street celebration that perfectly blended tradition with high-energy entertainment.',
   },
   {
     id: 12,
@@ -112,15 +135,16 @@ const GALLERY_IMAGES = [
     date: '2023',
     src: '/frames/ezgif-frame-070.jpg',
     description: 'Vibrant club lighting show with strobes and RGB laser grids.',
+    fullDesc:
+      'This club-style party setup featured our full lighting arsenal — strobes for high-energy moments, RGB laser grids painting geometric patterns across the venue, LED pixel bars for ambient effects, and moving heads for dramatic beam shows. Combined with our DJ performance, it created an authentic nightclub experience.',
   },
 ];
 
-const CATEGORIES = ['All Events', 'Weddings & Baraat', 'DJ Nights', 'Corporate Events', 'Lighting & Stage', 'Family Parties'];
+export const CATEGORIES = ['All Events', 'Weddings & Baraat', 'DJ Nights', 'Corporate Events', 'Lighting & Stage', 'Family Parties'];
 
 export default function GallerySection({ onViewAllEvents }) {
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [selectedIndex, setSelectedIndex] = useState(0);
   const gridRef = useRef(null);
+  const router = useRouter();
 
   // Featured 4 images for home section preview
   const previewImages = GALLERY_IMAGES.slice(0, 4);
@@ -135,394 +159,193 @@ export default function GallerySection({ onViewAllEvents }) {
     return () => anim?.scrollTrigger?.kill();
   }, []);
 
-  const openLightbox = (img, index) => {
-    setSelectedImage(img);
-    setSelectedIndex(index);
-    document.body.style.overflow = 'hidden';
+  const handleCardClick = (id) => {
+    router.push(`/golden-memories/${id}`);
   };
 
-  const closeLightbox = useCallback(() => {
-    setSelectedImage(null);
-    document.body.style.overflow = '';
-  }, []);
-
-  const prevImage = useCallback(
-    (e) => {
-      e?.stopPropagation();
-      const nextIdx = (selectedIndex - 1 + previewImages.length) % previewImages.length;
-      setSelectedIndex(nextIdx);
-      setSelectedImage(previewImages[nextIdx]);
-    },
-    [selectedIndex, previewImages]
-  );
-
-  const nextImage = useCallback(
-    (e) => {
-      e?.stopPropagation();
-      const nextIdx = (selectedIndex + 1) % previewImages.length;
-      setSelectedIndex(nextIdx);
-      setSelectedImage(previewImages[nextIdx]);
-    },
-    [selectedIndex, previewImages]
-  );
-
-  // Keyboard navigation for lightbox
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (!selectedImage) return;
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowLeft') prevImage();
-      if (e.key === 'ArrowRight') nextImage();
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedImage, closeLightbox, prevImage, nextImage]);
-
   return (
-    <>
-      <section
-        id="gallery"
-        className="section"
-        style={{ background: 'var(--color-void)', position: 'relative' }}
-        aria-label="Old Events Gallery"
-      >
-        <div
-          className="section-glow"
-          style={{
-            top: '30%',
-            right: '-200px',
-            background: 'radial-gradient(circle, rgba(168,85,247,0.06), transparent 70%)',
-          }}
-        />
+    <section
+      id="golden-memories"
+      className="section"
+      style={{ background: 'var(--color-void)', position: 'relative' }}
+      aria-label="Golden Memories & Old Events Gallery"
+    >
+      <div
+        className="section-glow"
+        style={{
+          top: '30%',
+          right: '-200px',
+          background: 'radial-gradient(circle, rgba(168,85,247,0.06), transparent 70%)',
+        }}
+      />
 
-        <div className="section-inner" style={{ position: 'relative', zIndex: 1 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1.5rem', marginBottom: '4rem' }}>
-            <div>
-              <span className="text-label" style={{ display: 'block', marginBottom: '1rem' }}>
-                Past Celebrations &amp; Memory Archive
-              </span>
-              <h2 className="text-display">
-                OLD <span style={{ color: 'var(--color-purple)' }}>EVENTS.</span>
-              </h2>
-            </div>
-
-
-          </div>
-
-          {/* Gallery Grid */}
-          <div
-            ref={gridRef}
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-              gap: '1.5rem',
-            }}
-          >
-            {previewImages.map((img, idx) => (
-              <div
-                key={img.id}
-                className="gallery-card"
-                onClick={() => openLightbox(img, idx)}
-                style={{
-                  position: 'relative',
-                  height: '260px',
-                  borderRadius: '12px',
-                  overflow: 'hidden',
-                  cursor: 'pointer',
-                  border: '1px solid rgba(255, 255, 255, 0.08)',
-                  background: 'var(--color-abyss)',
-                }}
-              >
-                <img
-                  src={img.src}
-                  alt={img.title}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
-                  }}
-                  onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.08)')}
-                  onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                />
-
-                {/* Gradient Overlay */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, transparent 100%)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                    padding: '1.25rem',
-                    transition: 'opacity 0.3s ease',
-                  }}
-                >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span
-                      style={{
-                        background: 'rgba(0,0,0,0.6)',
-                        backdropFilter: 'blur(8px)',
-                        color: 'var(--color-white)',
-                        fontSize: '0.65rem',
-                        fontWeight: 600,
-                        letterSpacing: '0.1em',
-                        padding: '4px 10px',
-                        borderRadius: '20px',
-                        border: '1px solid rgba(255,255,255,0.15)',
-                        textTransform: 'uppercase',
-                      }}
-                    >
-                      {img.category}
-                    </span>
-                    <span
-                      style={{
-                        width: '32px',
-                        height: '32px',
-                        borderRadius: '50%',
-                        background: 'rgba(59, 130, 246, 0.8)',
-                        color: '#fff',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        boxShadow: '0 0 15px rgba(59,130,246,0.5)',
-                      }}
-                    >
-                      <ZoomIn size={16} />
-                    </span>
-                  </div>
-
-                  <div>
-                    <h3
-                      style={{
-                        fontFamily: 'var(--font-display)',
-                        fontSize: '1.1rem',
-                        fontWeight: 700,
-                        color: 'var(--color-white)',
-                        marginBottom: '0.25rem',
-                      }}
-                    >
-                      {img.title}
-                    </h3>
-                    <p style={{ fontSize: '0.75rem', color: 'var(--color-mist)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                      <MapPin size={12} style={{ color: 'var(--color-electric)' }} /> {img.location}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* View More Redirect CTA */}
-          <div style={{ textAlign: 'center', marginTop: '4rem' }}>
-            <button
-              onClick={onViewAllEvents}
-              className="btn-primary"
-              style={{
-                padding: '1.1rem 2.6rem',
-                fontSize: '0.88rem',
-                letterSpacing: '0.15em',
-                borderRadius: '50px',
-                background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(168, 85, 247, 0.2))',
-                border: '1px solid rgba(168, 85, 247, 0.5)',
-                boxShadow: '0 0 30px rgba(168, 85, 247, 0.25)',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.8rem',
-                cursor: 'pointer',
-              }}
-            >
-              <Images size={18} />
-              <span>View All ({GALLERY_IMAGES.length}+) Old Events &amp; Photos</span>
-              <ArrowRight size={18} />
-            </button>
+      <div className="section-inner" style={{ position: 'relative', zIndex: 1 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1.5rem', marginBottom: '4rem' }}>
+          <div>
+            <span className="text-label" style={{ display: 'block', marginBottom: '1rem' }}>
+              Past Celebrations &amp; Memory Archive
+            </span>
+            <h2 className="text-display">
+              GOLDEN <span style={{ color: 'var(--color-purple)' }}>MEMORIES.</span>
+            </h2>
           </div>
         </div>
-      </section>
 
-      {/* FULLSCREEN LIGHTBOX ZOOM MODAL */}
-      {selectedImage && (
+        {/* Gallery Grid */}
         <div
-          onClick={closeLightbox}
+          ref={gridRef}
           style={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: 99999,
-            background: 'rgba(0, 0, 0, 0.95)',
-            backdropFilter: 'blur(20px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '2rem',
-            animation: 'fadeIn 0.3s ease-out forwards',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+            gap: '1.5rem',
           }}
         >
-          {/* Close button */}
-          <button
-            onClick={closeLightbox}
-            aria-label="Close image zoom"
-            style={{
-              position: 'absolute',
-              top: '20px',
-              right: '24px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              color: '#fff',
-              width: '48px',
-              height: '48px',
-              borderRadius: '50%',
-              fontSize: '1.5rem',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              zIndex: 100001,
-              transition: 'all 0.3s ease',
-            }}
-            onMouseOver={(e) => (e.currentTarget.style.background = 'rgba(239, 68, 68, 0.8)')}
-            onMouseOut={(e) => (e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)')}
-          >
-            <X size={24} />
-          </button>
-
-          {/* Prev Arrow */}
-          <button
-            onClick={prevImage}
-            aria-label="Previous image"
-            style={{
-              position: 'absolute',
-              left: '24px',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              color: '#fff',
-              width: '50px',
-              height: '50px',
-              borderRadius: '50%',
-              fontSize: '1.4rem',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              zIndex: 100001,
-              transition: 'all 0.3s ease',
-            }}
-            onMouseOver={(e) => (e.currentTarget.style.background = 'rgba(59, 130, 246, 0.8)')}
-            onMouseOut={(e) => (e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)')}
-          >
-            <ChevronLeft size={28} />
-          </button>
-
-          {/* Next Arrow */}
-          <button
-            onClick={nextImage}
-            aria-label="Next image"
-            style={{
-              position: 'absolute',
-              right: '24px',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              color: '#fff',
-              width: '50px',
-              height: '50px',
-              borderRadius: '50%',
-              fontSize: '1.4rem',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              zIndex: 100001,
-              transition: 'all 0.3s ease',
-            }}
-            onMouseOver={(e) => (e.currentTarget.style.background = 'rgba(59, 130, 246, 0.8)')}
-            onMouseOut={(e) => (e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)')}
-          >
-            <ChevronRight size={28} />
-          </button>
-
-          {/* Modal Container */}
-          <div
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              maxWidth: '1000px',
-              maxHeight: '90vh',
-              width: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              position: 'relative',
-              zIndex: 100000,
-            }}
-          >
+          {previewImages.map((img) => (
             <div
+              key={img.id}
+              className="gallery-card"
+              onClick={() => handleCardClick(img.id)}
               style={{
                 position: 'relative',
-                borderRadius: '16px',
+                height: '280px',
+                borderRadius: '12px',
                 overflow: 'hidden',
-                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 40px rgba(59, 130, 246, 0.3)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                maxHeight: '75vh',
+                cursor: 'pointer',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                background: 'var(--color-abyss)',
+                transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.border = '1px solid rgba(168, 85, 247, 0.35)';
+                e.currentTarget.style.transform = 'translateY(-6px)';
+                e.currentTarget.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.4)';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.border = '1px solid rgba(255, 255, 255, 0.08)';
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
               }}
             >
               <img
-                src={selectedImage.src}
-                alt={selectedImage.title}
+                src={img.src}
+                alt={img.title}
                 style={{
-                  maxWidth: '100%',
-                  maxHeight: '75vh',
-                  objectFit: 'contain',
-                  display: 'block',
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
                 }}
+                onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.08)')}
+                onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
               />
-            </div>
 
-            {/* Caption & Counter */}
-            <div
-              style={{
-                marginTop: '1.25rem',
-                textAlign: 'center',
-                color: '#fff',
-                maxWidth: '600px',
-              }}
-            >
-              <span
+              {/* Gradient Overlay */}
+              <div
                 style={{
-                  fontSize: '0.7rem',
-                  letterSpacing: '0.2em',
-                  textTransform: 'uppercase',
-                  color: 'var(--color-electric)',
-                  fontWeight: 600,
-                  display: 'block',
-                  marginBottom: '0.4rem',
+                  position: 'absolute',
+                  inset: 0,
+                  background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, transparent 100%)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  padding: '1.25rem',
                 }}
               >
-                {selectedImage.category} • {selectedIndex + 1} of {previewImages.length}
-              </span>
-              <h3
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: '1.4rem',
-                  fontWeight: 700,
-                  marginBottom: '0.4rem',
-                }}
-              >
-                {selectedImage.title}
-              </h3>
-              <p style={{ fontSize: '0.88rem', color: 'var(--color-silver)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }}>
-                <MapPin size={14} style={{ color: 'var(--color-electric)' }} /> {selectedImage.location} • {selectedImage.description}
-              </p>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span
+                    style={{
+                      background: 'rgba(0,0,0,0.6)',
+                      backdropFilter: 'blur(8px)',
+                      color: 'var(--color-white)',
+                      fontSize: '0.65rem',
+                      fontWeight: 600,
+                      letterSpacing: '0.1em',
+                      padding: '4px 10px',
+                      borderRadius: '20px',
+                      border: '1px solid rgba(255,255,255,0.15)',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {img.category}
+                  </span>
+                  <span
+                    style={{
+                      background: 'rgba(0,0,0,0.6)',
+                      backdropFilter: 'blur(8px)',
+                      color: 'var(--color-mist)',
+                      fontSize: '0.65rem',
+                      fontWeight: 600,
+                      letterSpacing: '0.1em',
+                      padding: '4px 10px',
+                      borderRadius: '20px',
+                      border: '1px solid rgba(255,255,255,0.1)',
+                    }}
+                  >
+                    {img.date}
+                  </span>
+                </div>
+
+                <div>
+                  <h3
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontSize: '1.1rem',
+                      fontWeight: 700,
+                      color: 'var(--color-white)',
+                      marginBottom: '0.4rem',
+                    }}
+                  >
+                    {img.title}
+                  </h3>
+                  <p style={{ fontSize: '0.75rem', color: 'var(--color-mist)', display: 'flex', alignItems: 'center', gap: '0.3rem', marginBottom: '0.75rem' }}>
+                    <MapPin size={12} style={{ color: 'var(--color-electric)' }} /> {img.location}
+                  </p>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.4rem',
+                      color: 'var(--color-purple)',
+                      fontSize: '0.75rem',
+                      fontWeight: 600,
+                      letterSpacing: '0.08em',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    <span>View Memory</span>
+                    <ArrowRight size={14} />
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
-      )}
-    </>
+
+        {/* View More Redirect CTA */}
+        <div style={{ textAlign: 'center', marginTop: '4rem' }}>
+          <button
+            onClick={onViewAllEvents}
+            className="btn-primary"
+            style={{
+              padding: '1.1rem 2.6rem',
+              fontSize: '0.88rem',
+              letterSpacing: '0.15em',
+              borderRadius: '50px',
+              background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(168, 85, 247, 0.2))',
+              border: '1px solid rgba(168, 85, 247, 0.5)',
+              boxShadow: '0 0 30px rgba(168, 85, 247, 0.25)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.8rem',
+              cursor: 'pointer',
+            }}
+          >
+            <Images size={18} />
+            <span>View All ({GALLERY_IMAGES.length}+) Old Events &amp; Photos</span>
+            <ArrowRight size={18} />
+          </button>
+        </div>
+      </div>
+    </section>
   );
 }
-
-export { GALLERY_IMAGES, CATEGORIES };

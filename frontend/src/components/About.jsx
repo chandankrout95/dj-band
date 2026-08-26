@@ -28,7 +28,7 @@ export default function About() {
   return (
     <section
       ref={sectionRef}
-      id="about"
+      id="about-us"
       className="section"
       style={{
         background: 'var(--color-abyss)',

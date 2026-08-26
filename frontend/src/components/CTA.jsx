@@ -106,10 +106,10 @@ export default function CTA() {
             opacity: 0,
           }}
         >
-          <a href="#contact" className="btn-primary">
+          <a href="#contact-us" className="btn-primary">
             Book Your Event
           </a>
-          <a href="#contact" className="btn-secondary">
+          <a href="#contact-us" className="btn-secondary">
             Get In Touch
           </a>
         </div>

@@ -3,10 +3,12 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 
 const NAV_LINKS = [
-  { label: 'Items', href: '#items' },
-  { label: 'Old Events', href: '#gallery' },
-  { label: 'About', href: '#about' },
-  { label: 'Connect', href: '#contact' },
+  { label: 'Services', href: '#services' },
+  { label: 'Equipments', href: '#equipments' },
+  { label: 'Golden Memories', href: '#golden-memories' },
+  { label: 'Contact Us', href: '#contact-us' },
+  { label: 'About Us', href: '#about-us' },
+  { label: 'Reviews', href: '#reviews' },
 ];
 
 export default function Navbar({ lenisRef }) {

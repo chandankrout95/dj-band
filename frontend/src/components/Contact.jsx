@@ -29,7 +29,7 @@ export default function Contact() {
   return (
     <section
       ref={sectionRef}
-      id="contact"
+      id="contact-us"
       className="section"
       style={{
         background: 'radial-gradient(ellipse at center, rgba(15, 23, 42, 0.95) 0%, var(--color-void) 100%)',

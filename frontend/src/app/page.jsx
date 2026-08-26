@@ -7,6 +7,7 @@ import usePreloader from '@/hooks/usePreloader';
 
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import Services from '@/components/Services';
 import ItemSection from '@/components/ItemSection';
 import GallerySection from '@/components/GallerySection';
 import About from '@/components/About';
@@ -46,6 +47,7 @@ export default function Home() {
       <main className="relative z-[1] min-h-screen bg-black text-white">
         <Navbar lenisRef={lenisRef} />
         <Hero images={images} />
+        <Services />
         <ItemSection />
         <GallerySection onViewAllEvents={handleOpenFullGallery} />
         <About />

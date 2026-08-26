@@ -4,20 +4,20 @@ import { useCallback } from 'react';
 import { MapPin, Clock, Phone, ArrowUp, Navigation2 } from 'lucide-react';
 
 const NAV_LINKS = [
-  { label: 'Items', href: '#items' },
-  { label: 'Old Events', href: '#gallery' },
-  { label: 'About', href: '#about' },
-  { label: 'Connect', href: '#contact' },
-  { label: 'Google Reviews', href: '#reviews' },
+  { label: 'Services', href: '#services' },
+  { label: 'Equipments', href: '#equipments' },
+  { label: 'Golden Memories', href: '#golden-memories' },
+  { label: 'Contact Us', href: '#contact-us' },
+  { label: 'About Us', href: '#about-us' },
+  { label: 'Reviews', href: '#reviews' },
 ];
 
 const SERVICES_LIST = [
-  'Wedding Baraat Brass Band',
-  'High-Energy DJ Nights',
-  'Pro Audio & Subwoofer Systems',
-  'Moving Head & Laser Lighting',
-  'Stage Trussing & Rigging',
-  'Silent Generator Backup',
+  'Barat & Wedding Procession',
+  'Corporate Events & Galas',
+  'DJ Setup in College & Fests',
+  'Ring Ceremony & Engagement',
+  'Barmala (Varmala) Ceremony',
 ];
 
 export default function Footer({ lenisRef }) {
