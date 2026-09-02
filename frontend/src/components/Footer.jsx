@@ -49,8 +49,9 @@ export default function Footer({ lenisRef }) {
         background: 'var(--color-void)',
         position: 'relative',
         borderTop: '1px solid rgba(255, 255, 255, 0.05)',
-        paddingTop: '5rem',
-        paddingBottom: '3rem',
+        padding: '5rem 1.5rem 3rem',
+        width: '100%',
+        boxSizing: 'border-box',
       }}
     >
       <div
@@ -61,14 +62,16 @@ export default function Footer({ lenisRef }) {
           display: 'flex',
           flexDirection: 'column',
           gap: '3.5rem',
+          width: '100%',
         }}
       >
         {/* Top Architectural Columns Grid */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: '3rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))',
+            gap: 'clamp(2rem, 4vw, 3rem)',
+            width: '100%',
           }}
         >
           {/* Column 1: Brand Info */}

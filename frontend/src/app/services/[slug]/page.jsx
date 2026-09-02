@@ -62,13 +62,15 @@ export default function ServiceDetailPage() {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',
           gap: '1.5rem',
-          padding: '2rem',
+          padding: 'clamp(1.25rem, 3vw, 2rem)',
           background: 'rgba(255, 255, 255, 0.02)',
           border: '1px solid rgba(255, 255, 255, 0.07)',
           borderRadius: '18px',
           marginBottom: '4.5rem',
+          width: '100%',
+          boxSizing: 'border-box',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
@@ -256,16 +258,18 @@ export default function ServiceDetailPage() {
                 key={index}
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
                   gap: '2rem',
                   background: 'rgba(255, 255, 255, 0.02)',
                   border: '1px solid rgba(255, 255, 255, 0.08)',
                   borderRadius: '20px',
                   overflow: 'hidden',
-                  padding: '1.5rem',
+                  padding: 'clamp(1rem, 3vw, 1.5rem)',
                   alignItems: 'center',
                   transition: 'all 0.3s ease',
                   boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
+                  width: '100%',
+                  boxSizing: 'border-box',
                 }}
                 onMouseOver={(e) => {
                   e.currentTarget.style.borderColor = 'rgba(168, 85, 247, 0.35)';
@@ -437,8 +441,9 @@ export default function ServiceDetailPage() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
             gap: '1.25rem',
+            width: '100%',
           }}
         >
           {service.features.map((feature, i) => (
@@ -610,8 +615,9 @@ export default function ServiceDetailPage() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
             gap: '1.5rem',
+            width: '100%',
           }}
         >
           {otherServices.map((other) => (

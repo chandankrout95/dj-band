@@ -212,9 +212,12 @@ export default function Contact() {
           className="contact-animate"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-            gap: '2.5rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))',
+            gap: 'clamp(1.5rem, 3vw, 2.5rem)',
             maxWidth: '1000px',
+            margin: '0 auto',
+            width: '100%',
+            boxSizing: 'border-box',
             borderTop: '1px solid rgba(255, 255, 255, 0.1)',
             paddingTop: '3rem',
           }}

@@ -196,8 +196,9 @@ export default function GallerySection({ onViewAllEvents }) {
           ref={gridRef}
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-            gap: '1.5rem',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))',
+            gap: 'clamp(1.25rem, 3vw, 1.5rem)',
+            width: '100%',
           }}
         >
           {previewImages.map((img) => (
@@ -214,6 +215,8 @@ export default function GallerySection({ onViewAllEvents }) {
                 border: '1px solid rgba(255, 255, 255, 0.08)',
                 background: 'var(--color-abyss)',
                 transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                width: '100%',
+                boxSizing: 'border-box',
               }}
               onMouseOver={(e) => {
                 e.currentTarget.style.border = '1px solid rgba(168, 85, 247, 0.35)';

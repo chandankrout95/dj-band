@@ -218,8 +218,9 @@ export default function GoogleReviews() {
           ref={gridRef}
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '2rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+            gap: 'clamp(1.25rem, 3vw, 2rem)',
+            width: '100%',
           }}
         >
           {REVIEWS.map((r) => (
@@ -230,11 +231,13 @@ export default function GoogleReviews() {
                 background: 'rgba(255, 255, 255, 0.02)',
                 border: '1px solid rgba(255, 255, 255, 0.07)',
                 borderRadius: '16px',
-                padding: '2rem',
+                padding: 'clamp(1.25rem, 4vw, 2rem)',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 transition: 'all 0.3s ease',
+                width: '100%',
+                boxSizing: 'border-box',
               }}
             >
               <div>

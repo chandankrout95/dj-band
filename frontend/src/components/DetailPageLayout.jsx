@@ -125,9 +125,11 @@ export default function DetailPageLayout({
             bottom: 0,
             left: 0,
             right: 0,
-            padding: '3rem 2rem 2.5rem',
+            padding: '3rem clamp(1rem, 3vw, 2rem) 2.5rem',
             maxWidth: '1200px',
             margin: '0 auto',
+            boxSizing: 'border-box',
+            width: '100%',
           }}
         >
           {tag && (
@@ -183,7 +185,9 @@ export default function DetailPageLayout({
         style={{
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '4rem 2rem 6rem',
+          padding: '4rem clamp(1rem, 3vw, 2rem) 6rem',
+          boxSizing: 'border-box',
+          width: '100%',
         }}
       >
         {children}
@@ -194,7 +198,9 @@ export default function DetailPageLayout({
         style={{
           borderTop: '1px solid rgba(255, 255, 255, 0.06)',
           background: 'rgba(255, 255, 255, 0.02)',
-          padding: '3rem 2rem',
+          padding: '3rem clamp(1rem, 3vw, 2rem)',
+          boxSizing: 'border-box',
+          width: '100%',
         }}
       >
         <div

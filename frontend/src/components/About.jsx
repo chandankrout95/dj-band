@@ -71,9 +71,10 @@ export default function About() {
           className="about-animate"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '3.5rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+            gap: 'clamp(1.5rem, 4vw, 3.5rem)',
             marginBottom: '4rem',
+            width: '100%',
           }}
         >
           <div>
@@ -99,18 +100,20 @@ export default function About() {
           className="about-animate"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))',
             gap: '1.5rem',
-            padding: '2rem 2.5rem',
+            padding: 'clamp(1.25rem, 3vw, 2rem) clamp(1rem, 3vw, 2.5rem)',
             background: 'rgba(255, 255, 255, 0.02)',
             border: '1px solid rgba(255, 255, 255, 0.08)',
             borderRadius: '16px',
             marginBottom: '4.5rem',
+            width: '100%',
+            boxSizing: 'border-box',
           }}
         >
           <div>
             <span style={{ fontSize: '2.2rem', fontWeight: 800, color: 'var(--color-electric)', fontFamily: 'var(--font-display)' }}>
-              15+
+              25+
             </span>
             <p style={{ fontSize: '0.85rem', color: 'var(--color-mist)', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '0.2rem' }}>
               Years of Musical Excellence
@@ -118,7 +121,7 @@ export default function About() {
           </div>
           <div>
             <span style={{ fontSize: '2.2rem', fontWeight: 800, color: 'var(--color-purple)', fontFamily: 'var(--font-display)' }}>
-              500+
+              3000+
             </span>
             <p style={{ fontSize: '0.85rem', color: 'var(--color-mist)', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '0.2rem' }}>
               Successful Celebrations
@@ -126,7 +129,7 @@ export default function About() {
           </div>
           <div>
             <span style={{ fontSize: '2.2rem', fontWeight: 800, color: '#22c55e', fontFamily: 'var(--font-display)' }}>
-              4.9 ★
+              4.3 ★
             </span>
             <p style={{ fontSize: '0.85rem', color: 'var(--color-mist)', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '0.2rem' }}>
               Verified Google Rating
@@ -161,9 +164,10 @@ export default function About() {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '2.5rem',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+              gap: 'clamp(1.5rem, 3vw, 2.5rem)',
               alignItems: 'center',
+              width: '100%',
             }}
           >
             {/* Embedded Google Map */}

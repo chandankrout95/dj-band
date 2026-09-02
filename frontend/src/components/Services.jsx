@@ -467,8 +467,9 @@ export default function Services() {
           ref={gridRef}
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '2rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+            gap: 'clamp(1.25rem, 3vw, 2rem)',
+            width: '100%',
           }}
         >
           {SERVICES.map((service) => (
@@ -486,6 +487,9 @@ export default function Services() {
                 display: 'flex',
                 flexDirection: 'column',
                 boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
+                padding: 0,
+                width: '100%',
+                boxSizing: 'border-box',
               }}
               onMouseOver={(e) => {
                 e.currentTarget.style.border = '1px solid rgba(59, 130, 246, 0.4)';
@@ -518,7 +522,7 @@ export default function Services() {
                   onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.08)')}
                   onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
                 />
-                
+
                 {/* Number Badge */}
                 <span
                   style={{

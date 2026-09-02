@@ -162,8 +162,9 @@ export default function ItemSection() {
           ref={gridRef}
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '2rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+            gap: 'clamp(1.25rem, 3vw, 2rem)',
+            width: '100%',
           }}
         >
           {ITEMS.map((item) => {
@@ -182,6 +183,8 @@ export default function ItemSection() {
                   display: 'flex',
                   flexDirection: 'column',
                   cursor: 'pointer',
+                  width: '100%',
+                  boxSizing: 'border-box',
                 }}
                 onMouseOver={(e) => {
                   e.currentTarget.style.border = '1px solid rgba(59, 130, 246, 0.3)';
