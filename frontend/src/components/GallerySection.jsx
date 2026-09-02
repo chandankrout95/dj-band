@@ -160,7 +160,19 @@ export default function GallerySection({ onViewAllEvents }) {
   }, []);
 
   const handleCardClick = (id) => {
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('home_scroll_pos', window.scrollY.toString());
+    }
     router.push(`/golden-memories/${id}`);
+  };
+
+  const handleViewAll = () => {
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('home_scroll_pos', window.scrollY.toString());
+    }
+    if (onViewAllEvents) {
+      onViewAllEvents();
+    }
   };
 
   return (
@@ -327,7 +339,7 @@ export default function GallerySection({ onViewAllEvents }) {
         {/* View More Redirect CTA */}
         <div style={{ textAlign: 'center', marginTop: '4rem' }}>
           <button
-            onClick={onViewAllEvents}
+            onClick={handleViewAll}
             className="btn-primary"
             style={{
               padding: '1.1rem 2.6rem',

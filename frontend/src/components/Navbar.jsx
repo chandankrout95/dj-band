@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { X } from 'lucide-react';
 
 const NAV_LINKS = [
   { label: 'Services', href: '#services' },
@@ -62,6 +63,31 @@ export default function Navbar({ lenisRef }) {
       document.body.style.overflow = '';
     };
   }, [mobileOpen]);
+
+  // Phone back button closes menu: push a history entry when menu opens,
+  // listen to popstate to close it
+  useEffect(() => {
+    if (mobileOpen) {
+      window.history.pushState({ mobileMenu: true }, '');
+    }
+
+    const handlePopState = () => {
+      if (mobileOpen) {
+        setMobileOpen(false);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [mobileOpen]);
+
+  // Close via X button — also pops the history entry we pushed
+  const handleCloseMenu = useCallback(() => {
+    setMobileOpen(false);
+    if (window.history.state?.mobileMenu) {
+      window.history.back();
+    }
+  }, []);
 
   return (
     <>
@@ -138,6 +164,33 @@ export default function Navbar({ lenisRef }) {
         role="dialog"
         aria-label="Mobile navigation"
       >
+        {/* X Close Button */}
+        <button
+          onClick={handleCloseMenu}
+          aria-label="Close menu"
+          style={{
+            position: 'absolute',
+            top: 'clamp(1.2rem, 3vw, 2rem)',
+            right: 'clamp(1.2rem, 3vw, 2rem)',
+            background: 'rgba(255, 255, 255, 0.08)',
+            border: '1px solid rgba(255, 255, 255, 0.15)',
+            borderRadius: '50%',
+            width: '44px',
+            height: '44px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            color: 'rgba(255, 255, 255, 0.85)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            transition: 'all 0.3s ease',
+            zIndex: 10,
+          }}
+        >
+          <X size={22} strokeWidth={2.5} />
+        </button>
+
         {NAV_LINKS.map((link) => (
           <a
             key={link.href}

@@ -412,6 +412,9 @@ export default function Services() {
   }, []);
 
   const handleCardClick = (slug) => {
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('home_scroll_pos', window.scrollY.toString());
+    }
     router.push(`/services/${slug}`);
   };
 

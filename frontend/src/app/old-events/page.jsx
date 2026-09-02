@@ -7,7 +7,14 @@ export default function OldEventsPage() {
   const router = useRouter();
 
   const handleBackToHome = () => {
-    router.push('/#gallery');
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('should_restore_scroll', 'true');
+    }
+    if (typeof window !== 'undefined' && window.history.length > 2) {
+      router.back();
+    } else {
+      router.push('/');
+    }
   };
 
   return <FullGalleryPage onBackToHome={handleBackToHome} />;

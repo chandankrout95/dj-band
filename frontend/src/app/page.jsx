@@ -38,7 +38,73 @@ export default function Home() {
     };
   }, []);
 
+  // Continuous scroll tracker — always saves exact Y coordinate
+  useEffect(() => {
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          if (window.scrollY > 80) {
+            sessionStorage.setItem('home_scroll_pos', window.scrollY.toString());
+          }
+          ticking = false;
+        });
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Scroll restoration — uses saved pixel position, no hashes
+  useEffect(() => {
+    const shouldRestore = sessionStorage.getItem('should_restore_scroll');
+    const savedPos = sessionStorage.getItem('home_scroll_pos');
+
+    if (!shouldRestore || !savedPos) return;
+
+    const targetY = parseFloat(savedPos);
+    if (isNaN(targetY) || targetY < 80) {
+      sessionStorage.removeItem('should_restore_scroll');
+      return;
+    }
+
+    // Clear the hash from URL if present (from any previous approach)
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+
+    // Retry with increasing delays to wait for GSAP ScrollTrigger pin recalculation
+    let attempt = 0;
+    const maxAttempts = 12;
+    const delays = [0, 50, 100, 150, 200, 300, 400, 500, 700, 900, 1200, 1500];
+
+    const restoreScroll = () => {
+      // Force scroll via both native and Lenis
+      window.scrollTo({ top: targetY, behavior: 'instant' });
+      if (lenisRef?.current) {
+        lenisRef.current.scrollTo(targetY, { immediate: true });
+      }
+
+      attempt++;
+      if (attempt < maxAttempts) {
+        setTimeout(restoreScroll, delays[attempt] || 200);
+      } else {
+        // Final cleanup
+        sessionStorage.removeItem('should_restore_scroll');
+      }
+    };
+
+    // Kick off immediately
+    restoreScroll();
+
+    return () => { attempt = maxAttempts; }; // cancel on unmount
+  }, [lenisRef]);
+
   const handleOpenFullGallery = () => {
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('home_scroll_pos', window.scrollY.toString());
+    }
     router.push('/old-events');
   };
 

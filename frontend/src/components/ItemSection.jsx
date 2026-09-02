@@ -131,6 +131,9 @@ export default function ItemSection() {
   }, []);
 
   const handleCardClick = (id) => {
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('home_scroll_pos', window.scrollY.toString());
+    }
     router.push(`/equipments/${id}`);
   };
 

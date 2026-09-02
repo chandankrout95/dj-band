@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, Phone, MessageCircle } from 'lucide-react';
 
@@ -15,9 +16,22 @@ export default function DetailPageLayout({
 }) {
   const router = useRouter();
 
+  // Always start detail pages from the top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleBack = (e) => {
     e.preventDefault();
-    router.push(backHref);
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('should_restore_scroll', 'true');
+    }
+    // Use browser back for true history navigation (preserves scroll position)
+    if (typeof window !== 'undefined' && window.history.length > 2) {
+      router.back();
+    } else {
+      router.push('/');
+    }
   };
 
   return (
